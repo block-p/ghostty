@@ -645,6 +645,12 @@ fn actionCommands(action: Action.Key) []const Command {
             .description = "Toggle whether mouse events are reported to terminal applications.",
         }},
 
+        .toggle_bidi_direction => comptime &.{.{
+            .action = .toggle_bidi_direction,
+            .title = "Toggle BiDi Direction (RTL / LTR)",
+            .description = "Toggle the terminal default paragraph direction between Left-to-Right and Right-to-Left.",
+        }},
+
         .toggle_background_opacity => comptime &.{.{
             .action = .toggle_background_opacity,
             .title = "Toggle Background Opacity",

@@ -1940,6 +1940,18 @@ pub fn Renderer(comptime GraphicsAPI: type) type {
             }
         }
 
+        /// Update the default BiDi paragraph direction.
+        pub fn setBidiDefaultDirection(
+            self: *Self,
+            dir: configpkg.Config.BidiDefaultDirection,
+        ) void {
+            self.draw_mutex.lockUncancelable(global.io());
+            defer self.draw_mutex.unlock(global.io());
+            self.config.bidi_default_direction = dir;
+            self.bidi_cache.reset();
+            self.markDirty();
+        }
+
         /// Resize the screen.
         pub fn setScreenSize(
             self: *Self,

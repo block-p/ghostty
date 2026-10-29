@@ -5725,6 +5725,20 @@ pub fn performBindingAction(self: *Surface, action: input.Binding.Action) !bool 
             log.debug("mouse reporting toggled: {}", .{self.config.mouse_reporting});
         },
 
+        .toggle_bidi_direction => {
+            const new_dir: configpkg.Config.BidiDefaultDirection = switch (self.config.bidi_default_direction) {
+                .rtl => .ltr,
+                else => .rtl,
+            };
+            self.config.bidi_default_direction = new_dir;
+            self.bidi_cache.reset();
+            _ = self.renderer_thread.mailbox.push(global.io(), .{
+                .bidi_default_direction = new_dir,
+            }, .{ .forever = {} });
+            try self.queueRender();
+            log.info("bidi default direction toggled to: {}", .{new_dir});
+        },
+
         .toggle_command_palette => return try self.rt_app.performAction(
             .{ .surface = self },
             .toggle_command_palette,

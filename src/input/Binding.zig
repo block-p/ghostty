@@ -783,6 +783,9 @@ pub const Action = union(enum) {
     /// option.
     toggle_mouse_reporting,
 
+    /// Toggle the terminal default paragraph direction between Left-to-Right and Right-to-Left.
+    toggle_bidi_direction,
+
     /// Toggle the command palette.
     ///
     /// The command palette is a popup that lets you see what actions
@@ -1396,6 +1399,7 @@ pub const Action = union(enum) {
             .toggle_window_float_on_top,
             .toggle_secure_input,
             .toggle_mouse_reporting,
+            .toggle_bidi_direction,
             .toggle_command_palette,
             .toggle_background_opacity,
             .show_on_screen_keyboard,
